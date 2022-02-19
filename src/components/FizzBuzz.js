@@ -14,21 +14,30 @@ class FizzBuzz extends Component
         let result = []
         for (let index = debut; index <= fin; index++) 
         {
-            if (index % 15 === 0)
+            if (this.isFizzNumber(index) && this.isBuzzNumber(index))
                 result.push("FizzBuzz")
-            else if (index % 5 === 0)
+            else if (this.isBuzzNumber(index))
                 result.push("Buzz")
-            else if (index % 3 === 0)
+            else if (this.isFizzNumber(index))
                 result.push("Fizz")
             else 
                 result.push(index)
         }
         return result
     }
+
+    isFizzNumber(number)
+    {
+        return (number % 3 === 0) || ((number + " ").indexOf("3") > -1)
+    }
+    isBuzzNumber(number)
+    {
+        return (number % 5 === 0) || ((number + " ").indexOf("5") > -1)
+    }
     
     render() 
     {
-        return ( <div>  {
+        return ( <div data-testid="fizzELement">  {
             this.getFizzBuzzNumbers(this.props.start, this.props.end).map((element, k) => <p data-testid={k} >{ element }</p>)
         }</div>)
     }
